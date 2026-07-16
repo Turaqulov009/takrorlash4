@@ -1,6 +1,10 @@
-from django.urls import path
-from .views import ProductViewSet
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ProductModelViewSet
 
-urlpatterns=[
-    path("",ProductViewSet.as_view({"post":"create"}))
+router = DefaultRouter()
+router.register('products', ProductModelViewSet, basename='product')
+
+urlpatterns = [
+    path('', include(router.urls)),
 ]
